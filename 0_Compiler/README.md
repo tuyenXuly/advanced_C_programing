@@ -1,4 +1,4 @@
-# Quá trình biên dịch của 1 chương trình C
+# Tổng quan về quá trình biên dịch của 1 chương trình C
 1.  C là một ngôn ngữ bậc trung nó cần 1 trình biên dịch để chuyển đổi nó thành mã máy (là mã mà máy tính có thể hiểu được - chỉ bao gồm các số 0,1)
 2.  Quá trình biên dịch chương trình C diễn ra như sau:
 ![](./Compilation-Process-in-C.png)
@@ -7,7 +7,7 @@
 (Cách để chạy 1 chương trình C sẽ được đề cập ở bài khác bài này chỉ giải thích các bước biên dịch của C)
  
 Quá trình biên dịch gồm 4 bước sau:
-- Bước 1 : Preprocessor - sẽ xử lý các tiền xử lý (có ký tự #) Đầu ra sẽ là các file .i
+- Bước 1 : Preprocessor - về cơ bản nó là 1 công cụ thay thế văn bản nó hướng dẫn trình biên dịch thực hiện các tiền xử lý trước khi biên dịch .Đầu ra sẽ là các file .i
   * Xóa bỏ các bình luận
   * Thêm các file #include - Chính vì thêm chính các file mà được #include vào nên điều này sẽ gây ra lỗi nếu ta đặt tên các Global variable có tên giống nhau ở các file hoặc các hàm có tên giống nhau => (phải sử dụng từ khóa static)
   * Thay thế các #Macro

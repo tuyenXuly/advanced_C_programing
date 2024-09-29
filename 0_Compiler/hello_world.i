@@ -1551,8 +1551,14 @@ void __attribute__((__cdecl__)) __mingw_str_free(void *ptr);
 # 2 "hello_world.c" 2
 
 
-# 3 "hello_world.c"
+
+
+
+
+
+# 8 "hello_world.c"
 int main(){
+    printf("value 1 = %d\n",3); printf("value 2 = %d\n",4);;
     printf("My favorite number is : %d\n",7);
 
     printf("Hello World!!");

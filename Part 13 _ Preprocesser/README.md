@@ -49,3 +49,4 @@
 - `#error` là một chỉ thị tiền xử lý cho phép tạo ra thông điệp lỗi tùy chỉnh. Khi trình biên dịch gặp chỉ thị này, nó sẽ dừng lại và hiển thị thông điệp lỗi mà bạn đã chỉ định.
 
     Chỉ thị này không làm cho mã không biên dịch, mà chỉ báo lỗi cho lập trình viên(hiển thị trên Standard Error).
+    

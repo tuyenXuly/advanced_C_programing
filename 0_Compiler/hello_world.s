@@ -3,8 +3,12 @@
 	.def	__main;	.scl	2;	.type	32;	.endef
 	.section .rdata,"dr"
 .LC0:
-	.ascii "My favorite number is : %d\12\0"
+	.ascii "value 1 = %d\12\0"
 .LC1:
+	.ascii "value 2 = %d\12\0"
+.LC2:
+	.ascii "My favorite number is : %d\12\0"
+.LC3:
 	.ascii "Hello World!!\0"
 	.text
 	.globl	main
@@ -19,11 +23,19 @@ main:
 	.seh_stackalloc	32
 	.seh_endprologue
 	call	__main
-	movl	$7, %edx
+	movl	$3, %edx
 	leaq	.LC0(%rip), %rax
 	movq	%rax, %rcx
 	call	printf
+	movl	$4, %edx
 	leaq	.LC1(%rip), %rax
+	movq	%rax, %rcx
+	call	printf
+	movl	$7, %edx
+	leaq	.LC2(%rip), %rax
+	movq	%rax, %rcx
+	call	printf
+	leaq	.LC3(%rip), %rax
 	movq	%rax, %rcx
 	call	printf
 	movl	$0, %eax

@@ -20,10 +20,10 @@
    ```
    có thể thấy ta có thể tạo ra các hàm Macro nhận các đối số như 1 hàm bình thường.Khi gọi các Macro, các đối số được thay thế trực tiếp vào vị trí tương ứng trong văn bản thay thế.
 ##   **Macros** vs. **Functions**
-    - Macro được xử lý trước khi chương trình biên dịch bằng cách thay thế. Các Functions không được xử lý trước mà chúng phải được biên soạn 
-    - Về tốc độ Macro nhanh hơn Function ở các hàm nhỏ và đơn giản
-    - Macro không được kiểm ra dữ liệu của tham số và không được biên dịch nó đơn giản chỉ là thay thế do đó có thể gây ra các lỗi khó phát hiện  
-    - Macro dễ gây nhầm lẫn nếu không được sử dụng cẩn thận nhất là với các biểu thức phức tạp.Điều này đặc biệt nguy hiểm nếu thiếu dấu ngoặc hoặc dùng toán tử sai cách
+  - Macro được xử lý trước khi chương trình biên dịch bằng cách thay thế. Các Functions không được xử lý trước mà chúng phải được biên soạn 
+  - Về tốc độ Macro nhanh hơn Function ở các hàm nhỏ và đơn giản
+  - Macro không được kiểm ra dữ liệu của tham số và không được biên dịch nó đơn giản chỉ là thay thế do đó có thể gây ra các lỗi khó phát hiện  
+  - Macro dễ gây nhầm lẫn nếu không được sử dụng cẩn thận nhất là với các biểu thức phức tạp.Điều này đặc biệt nguy hiểm nếu thiếu dấu ngoặc hoặc dùng toán tử sai cách
 - => Do vậy có 1 cách khác để thay thế cho Macro và Function để hạn chế nhược điểm của chúng đó chính là sử dụng `inline` 
    -  `inline` giống như Macro nó **gợi ý** cho trình biên dịch **thay thế thân hàm vào trong mã nơi gọi hàm** do vậy sẽ tối ưu được về mặt thời gian
    - `inline` cũng có khả năng kiểm tra dữ liệu  do vậy có thể dễ dàng gỡ được lỗi 

@@ -70,11 +70,108 @@ Address of p2: 00000021E51FF938
 Value of a through p1: 10
 Value of a through p2: 10 
 ```
-- CÁC ỨNG DỤNG CỦA CON TRỎ CẤP 2 - sẽ lấy ví dụ sau hiccc
+- CÁC ỨNG DỤNG CỦA CON TRỎ CẤP 2 - sẽ lấy ví dụ sau hic hicc
 
-    - Chúng tôi được sử dụng trong bộ nhớ bổ sung phân tích của các mảng đa chiều.
-    - Chúng tôi có thể được sử dụng để lưu trữ dữ liệu đa cấp như đoạn tài liệu văn bản, câu và ngữ nghĩa.
-    - Chúng tôi có thể sử dụng dữ liệu cấu trúc để thao tác trực tiếp địa chỉ của các nút mà không cần sao chép.
-    - Chúng tôi có thể sử dụng hàm số để thao tác với địa chỉ được lưu trữ trong bộ máy con trỏ.                                                                                                                                       
+    - Chúng được sử dụng trong bộ nhớ bổ sung phân tích của các mảng đa chiều.
+    - Chúng có thể được sử dụng để lưu trữ dữ liệu đa cấp như đoạn tài liệu văn bản, câu và ngữ nghĩa.
+    - Chúng có thể sử dụng dữ liệu cấu trúc để thao tác trực tiếp địa chỉ của các nút mà không cần sao chép.
+    - Chúng có thể sử dụng hàm số để thao tác với địa chỉ được lưu trữ trong bộ máy con trỏ.                      
 
+## Function pointer                                        
+- Ta thường quen thuộc với các biến với địa chỉ của nó Tuy nhiên các hàm cũng chứa một địa chỉ trong bộ nhớ => Do vậy chúng ta có thể sử dụng con trỏ để trỏ tới các hàm (vì bản chất con trỏ là lưu địa chỉ mà)
+- Dù không thông dụng như các con trỏ khác nhưng trong 1 số trường hợp ta sẽ phải dùng con trỏ hàm :
+    - Truyền con trỏ hàm như **tham số cho 1 hàm khác**,cho phép hàm thứ 2 biết cần sử dụng hàm nào.
+    - Một ứng dụng khác là sắp xếp một mảng, khi bạn cần so sánh hai phần tử để xem phần tử nào đứng trước.
+    - Con trỏ hàm còn được sử dụng trong việc tạo bảng định tuyến (dispatch tables). Bạn có thể tạo các bảng chứa các con trỏ hàm để xử lý các lệnh do người dùng nhập vào.
+    - Hệ thống menu điều khiển: Bạn có thể sử dụng con trỏ hàm để xử lý các lựa chọn menu của người dùng.
+    - Thay thế các câu lệnh switch hoặc if: Con trỏ hàm giúp tối giản cấu trúc điều kiện bằng cách ánh xạ các hàm tương ứng.
+    - Hiện thực hóa cơ chế gọi lại (callback): Tức là bạn truyền con trỏ hàm vào một hàm khác, và hàm này sẽ gọi lại hàm đó vào thời điểm nào đó trong quá trình chạy.
+- Con trỏ hàm có thể được truyền vào hàm,trả về từ hàm,lưu trữ trong mảng ,hoặc gán cho các hàm khác.
+- Syntax :
+    - Con trỏ hàm lưu địa chỉ của mã bắt đầu của hàm.Cần chú ý **tên của hàm cũng có thể lấy làm địa chỉ của hàm** ~ điều này giống như mảng vậy
+      
+      VD: Ta có 1 hàm `foo` như sau để lấy địa chỉ của hàm có thể là `&foo` hoặc `foo` 2 điều này là tương đương nhau.
+      ```c
+      void foo(int){
+        // this is code lines.
+      }
+      int main(){
+        printf("Address foo function is %p\n",foo);
+        printf("Address foo function is %p\n",&foo);
 
+        return 0;
+      }
+      ```
+
+    - Con trỏ hàm lưu địa chỉ của mã bắt đầu hàm tuy nhiên chỉ địa chỉ là không đủ để gọi hàm .Cần biết **số lượng và kiểu của tham số cần truyền vào** và **kiểu giá trị trả về**.Vì vậy việc khai báo con trỏ hàm phức tạp hơn so với con trỏ dữ liệu thông thường.
+
+        Ví dụ:
+         ```C
+          int (*ptr_foo)(int);
+          ptr_foo = foo; // of ptr_foo = &foo;
+          ```
+    - **Dấu ngoặc đơn** quanh (*pFunction) là cần thiết để tránh nhầm lẫn với hàm trả về con trỏ
+- **Gọi hàm thông qua con trỏ** : Khi bạn gọi hàm thông qua con trỏ hàm pFunction, bạn chỉ cần sử dụng tên của con trỏ như một hàm thông thường.
+
+    Ví dụ:
+
+        ```C
+        int result = pFunction(5);  // Gọi hàm add thông qua con trỏ
+        printf("%d\n"result);     // Output: 6
+        ```
+    Bạn không cần phải viết (*pFunction)(5) để bỏ tham chiếu, bởi vì pFunction đã **trỏ đến một hàm**, và trình biên dịch hiểu rằng bạn đang gọi hàm đó, không phải đang thao tác với **giá trị mà hàm trả về**.
+        
+- `typedef` để đơn giản cú pháp : Trong C, cú pháp của con trỏ hàm có thể gây khó hiểu, đặc biệt khi hàm có nhiều tham số hoặc kiểu trả về phức tạp. Sử dụng typedef giúp ẩn cú pháp phức tạp và làm cho mã dễ đọc hơn.
+
+- **Hàm Qsort** mà ta vẫn hay dùng chính là một ví dụ về việc sử dụng con trỏ hàm cú pháp của Qsort như sau:
+    ```C 
+    void qsort(void *base, size_t nitems, size_t size, int (*compar)(const void *, const void *));
+    ``` 
+
+    Ở đây **Compar** chính là một con trỏ hàm nó trỏ đến hàm so sánh được dùng để xác định thứ tự của các phần tử Nó được truyền vào hàm Qsort như một đối số.
+- **Pointer to a Function** vs. **Function returning a pointer** 
+    - **Con trỏ đến một hàm** là một biến dùng để lưu trữ địa chỉ của một hàm, và khi cần, có thể dùng nó để gọi hàm đó.
+        
+        ```C
+        int (*pFunc)(int);
+        ```
+    - **Một hàm trả về con trỏ** có cú pháp khác với con trỏ hàm. Hàm này sẽ trả về một con trỏ (thay vì trả về một giá trị kiểu int, float, v.v.).
+        ```C
+        int* func(int a);
+        ```
+
+## Void Pointers
+
+- Chúng ta trước đây đã học một con trỏ có kiểu là con trỏ đến `int` hay `float` ,... Thì nó có thể lưu địa chỉ của biến có kiểu định dạng đó.Chúng ta không thể gán địa chỉ của 1 biến kiểu `int` cho 1 con trỏ kiểu `float`.
+
+- Con trỏ `void` là mọt con trỏ đặc biệt.Nó đại diện cho sự không có kiểu,một con trỏ tổng quát tức là Một con trỏ kiểu `void` có thể trỏ đến **bất kỳ loại biến nào**, từ một giá trị số nguyên hoặc số thực đến một chuỗi ký tự.
+
+- Syntax :Cú pháp khai báo con trỏ kiểu void tương tự như con trỏ bình thường, nhưng khác ở chỗ thay vì kiểu dữ liệu, chúng ta sử dụng từ khóa `void`. Do đó, thay vì `int*` hay `float*`,.., chúng ta sẽ dùng `void*`.
+- Dữ liệu được trỏ tới bởi 1 con trỏ kiểu `void` không thể được giải tham chiếu 1 cách trực tiếp.Chúng ta không có kiểu để giải tham chiếu tới => để tham chiếu chúng ta phải ép kiểu địa chỉ và con trỏ kiểu void đến 1 loại con trỏ khác.
+Ví dụ:
+```C
+// C program to dereference the void
+// pointer to access the value
+
+#include <stdio.h>
+
+int main()
+{
+	int a = 10;
+	void* ptr = &a;
+	// The void pointer 'ptr' is cast to an integer pointer
+	// using '(int*)ptr' Then, the value is dereferenced
+	// with `*(int*)ptr` to get the value at that memory
+	// location
+	printf("%d", *(int*)ptr);
+	return 0;
+}
+```
+- Con trỏ `void` rất phổ biến khi được sử dụng như tham số trong hàm.Do một hàm có thể nhận được 1 con trỏ không cần kiểu cụ thể , giúp hàm trở nên tổng quát hơn.
+Ví dụ ta hay viết hàm so sánh cho hàm  qsort như sau:
+```C
+int compare(const void *a,const void *b){
+
+}
+```
+- Trong ngôn ngữ lập trình C, tất cả các con trỏ, bất kể chúng trỏ đến loại dữ liệu nào (ví dụ: int, float, char, hoặc void), **đều có cùng kích thước**. Kích thước của một con trỏ thường phụ thuộc vào kiến trúc của máy tính mà chương trình đang chạy. Trên hầu hết các kiến trúc hiện đại (như 32-bit hoặc 64-bit), kích thước của một con trỏ thường là 4 byte (trên 32-bit) hoặc 8 byte (trên 64-bit).

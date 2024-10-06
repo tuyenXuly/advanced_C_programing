@@ -17,10 +17,8 @@
 - Bây giờ với Double Pointer (Con trỏ cấp 2):
   - Giá trị của con trỏ : Đây là địa chỉ của con trỏ cấp 1
   - Giá trị mà địa chỉ đó trỏ tới : Đây chính là địa chỉ mà con trỏ cấp 1 đang trỏ tới - tức là địa chỉ của 1 biến thực sự.
-  - Nhìn ảnh này phát hiểu luôn .-.
-
+  - Nhìn ảnh này phát hiểu luôn
   ![](.\double-pointers-in-c.png)
-  
   - Về lý thuyết có thể có Pointer to Pointer to Pointer to .... (con trỏ cấp 3,cấp 4,...) tuy nhiên quá nhì nhằng và khó hiểu rất ít khi được sử dụng.Không nên làm gì nhiều hơn con trỏ cấp 2.
   - Trong trình cài đặt ngôn ngữ C, một con trỏ kép hoạt động tương tự như một con trỏ bình thường trong C. Vì vậy, kích thước của biến con trỏ kép luôn bằng con trỏ bình thường.
   - Ví dụ về con trỏ cấp 2:

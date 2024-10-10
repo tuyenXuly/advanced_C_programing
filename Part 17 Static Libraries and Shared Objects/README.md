@@ -31,6 +31,7 @@ các phần phụ thuộc bên ngoài vào chương trình chính để tạo th
     để hoạt động.
     - Nhược điểm : File thực thi có **kích thước lớn hơn** vì chứa toàn bộ mã của thư viện.Nếu có thay đổi trong thư viện, bạn phải biên dịch lại toàn bộ chương trình
 ![](./shared_lib.png)
+    - Syntax: ...............to be continued...................
 - **Liên kết động(Dynamic Linking or Shared Linking)** :
     - Liên kết động chỉ đưa tên của thư viện (tức là để tham chiếu đến thư viện đó) do đó mã
     của thư viện chỉ có thể được tải vào khi chương trình bắt đầu chạy.
@@ -40,6 +41,9 @@ các phần phụ thuộc bên ngoài vào chương trình chính để tạo th
     - Nhược điểm: Thời gian chạy lâu hơn do trong quá trình chạy nó mới tham chiếu đến các thư viện.Nếu thiếu thư viện khi chạy chương trình,
     chương trình sẽ bị lỗi.
 ![](./shared_lib.png)
-## So sánh giữa Liên kết tinh và Liên kết động
+    - Syntax: ...............to be continued........................
+## So sánh giữa Liên kết tĩnh và Liên kết động
 - **Liên kết tĩnh** giúp chương trình độc lập, nhưng kích thước sẽ lớn và khó khăn khi cập nhật thư viện
 - **Liên kết động** giúp tiết kiệm tài nguyên và dễ dàng cập nhật, nhưng phụ thuộc vào việc các thư viện cho sẵn trên hệ thống tại thời điểm chạy.
+## Dynamic Loading
+????

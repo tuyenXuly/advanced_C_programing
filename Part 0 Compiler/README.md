@@ -34,4 +34,4 @@ gcc -c hello_world.i -o hello_world.o
 ```
 gcc hello_world.o -o hello_world
 ```
-> Vậy là đã biên dịch 1 chương trình C xong rồi đó bây giờ ta chỉ việc chạy file .exe này là xong rồi.
+=> Vậy là đã biên dịch 1 chương trình C xong rồi đó bây giờ ta chỉ việc chạy file .exe này là xong rồi.

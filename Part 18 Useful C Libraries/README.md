@@ -88,7 +88,7 @@ x=19 y=5
 Trong trường hợp đó, bạn có thể bật lại `assert` bằng cách sử dụng câu lệnh undefine cho `NDEBUG` (`#undef NDEBUG`),
  ngay trước khi bao gồm thư viện `assert.h`. Câu lệnh này sẽ đảm bảo rằng `assert` được bật cho tệp mã nguồn của bạn.
 `Undef` phải xuất hiện trước khi include thư viện `assert.h` để có hiệu lực, giống như khi sử dụng `define`.
-- Đó là về **runtime assertions**(kiểm tra trong thời gian chạy).Trong C còn có **conpile-time assertions**(kiểm tra trong thời gian biên dịch)
+- Đó là về **runtime assertions**(kiểm tra trong thời gian chạy).Trong C còn có **compile-time assertions**(kiểm tra trong thời gian biên dịch)
 Trong chuẩn C11 còn có thêm tính năng kiểm tra trong thời gian biên dịch.Điều này có nghĩa là việc kiểm tra sẽ được thực hiện khi bạn 
 biên dịch chương trình,thay vì khi chạy chương trình.
 - Thư viện `assert.h` cung cấp macro `static_assert` như là một `alias` (bí danh) cho từ khóa `static_assert` trong C. 
@@ -97,5 +97,7 @@ Macro `static_assert` giúp tương thích tốt hơn với C++.
 - Static assert hoạt động như một câu lệnh khai báo (declaration statement). Không giống như hầu hết các câu lệnh trong C, 
 static assert có thể xuất hiện cả trong hoặc ngoài hàm.
 Macro `static assert` cho phép bạn tạo ra một thông báo lỗi trong quá trình biên dịch. 
-Thông báo lỗi sẽ chứa một chuỗi ký tự mà bạn chỉ định,
-và phụ thuộc vào giá trị của biểu thức được kiểm tra trong thời gian biên dịch
+
+- Thông báo lỗi sẽ chứa một chuỗi ký tự mà bạn chỉ định,
+và phụ thuộc vào giá trị của biểu thức được kiểm tra trong thời gian biên dịch.Do là thông báo lỗi trong thời gian biên dịch
+nên tham số truyền vào `static_assert` phải là hằng số.

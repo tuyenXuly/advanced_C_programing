@@ -25,12 +25,12 @@ Ví dụ để tạo ra file .s ta làm như sau:
 ``` 
 gcc -S hello_world.i -o hello_world.s
 ```
--Bước 3 :Assembler - đây là giai đoạn chuyển mã assembly thành mã máy tức là các file .o hoặc .obj (phụ thuộc vào kiến trúc hệ điều hành Window hay Linux)
+- Bước 3 :Assembler - đây là giai đoạn chuyển mã assembly thành mã máy tức là các file .o hoặc .obj (phụ thuộc vào kiến trúc hệ điều hành Window hay Linux)
 ```
 gcc -c hello_world.i -o hello_world.o
 ```
 
--Bước 4 :Linker - Giai đoạn này sẽ liên kết tất cả các file .o và các thư viện thành 1 file thực thi hoàn chỉnh (chính là file .exe chạy trên Window mà ta vẫn hay thấy)
+- Bước 4 :Linker - Giai đoạn này sẽ liên kết tất cả các file .o và các thư viện thành 1 file thực thi hoàn chỉnh (chính là file .exe chạy trên Window mà ta vẫn hay thấy)
 ```
 gcc hello_world.o -o hello_world
 ```

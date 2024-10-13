@@ -115,20 +115,20 @@ Value of a through p2: 10
 
     Ví dụ:
 
-        ```C
+    ```C
         int result = pFunction(5);  // Gọi hàm add thông qua con trỏ
         printf("%d\n"result);     // Output: 6
-        ```
+     ```
     Bạn không cần phải viết (*pFunction)(5) để bỏ tham chiếu, bởi vì pFunction đã **trỏ đến một hàm**, và trình biên dịch hiểu rằng bạn đang gọi hàm đó, không phải đang thao tác với **giá trị mà hàm trả về**.
         
 - `typedef` để đơn giản cú pháp : Trong C, cú pháp của con trỏ hàm có thể gây khó hiểu, đặc biệt khi hàm có nhiều tham số hoặc kiểu trả về phức tạp. Sử dụng typedef giúp ẩn cú pháp phức tạp và làm cho mã dễ đọc hơn.
 
-- **Hàm Qsort** mà ta vẫn hay dùng chính là một ví dụ về việc sử dụng con trỏ hàm cú pháp của Qsort như sau:
+- **Hàm qsort** mà ta vẫn hay dùng chính là một ví dụ về việc sử dụng con trỏ hàm cú pháp của `qsort` như sau:
     ```C 
-    void qsort(void *base, size_t nitems, size_t size, int (*compar)(const void *, const void *));
+    void qsort(void *base, size_t nitems, size_t size, int (*compare)(const void *, const void *));
     ``` 
 
-    Ở đây **Compar** chính là một con trỏ hàm nó trỏ đến hàm so sánh được dùng để xác định thứ tự của các phần tử Nó được truyền vào hàm Qsort như một đối số.
+    Ở đây **compare** chính là một con trỏ hàm nó trỏ đến hàm so sánh được dùng để xác định thứ tự của các phần tử Nó được truyền vào hàm Qsort như một đối số.
 - **Pointer to a Function** vs. **Function returning a pointer** 
     - **Con trỏ đến một hàm** là một biến dùng để lưu trữ địa chỉ của một hàm, và khi cần, có thể dùng nó để gọi hàm đó.
         

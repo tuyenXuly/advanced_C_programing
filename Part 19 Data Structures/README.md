@@ -28,4 +28,207 @@ Một lợi thế khác của danh sách liên kết là bạn có thể lưu tr
     ![](./aray.png)
     - Advantages and Disadvantages of Linked list
     ![](./linked_list.png)
+### Single linked list
+- Cấu trúc một node của danh sách liên kết ví dụ dưới đây là 1 danh sách liên kết với kiểu dữ liệu là `int`
+```C
+struct node{
+    int data;
+    struct node *next; // link
+};
+```
 
+Ý nghĩa của cấu trúc node:
+- Node ở đây có phần dữ liệu là một số
+nguyên lưu ở data, ngoài ra nó còn có 1
+phần con trỏ tới chính struct node.
+Phần này chính là địa chỉ của node tiếp
+theo của nó trong DSLK.
+- Như vậy mỗi node sẽ có **dữ liệu của nó
+và có địa chỉ của node tiếp sau nó**. Đối
+với con trỏ cuối cùng trong DSLK thì
+phần địa chỉ này sẽ là con trỏ NULL.
+- Mỗi node trong DSLK đều được **cấp phát động**
+
+Tạo một node mới:
+```C
+struct node* createNode(int val)
+{
+    // cap phat dong 1 node
+    struct node* newnode = (struct node *)malloc(sizeof(struct node));
+    if (newnode == NULL)
+    {
+        printf("\nMemory was not allocated");
+        return 0;
+    }
+    else
+    {
+        newnode->value = val;
+        newnode->next = NULL;
+        return newnode;
+    }
+}
+```
+#### Các thao tác với danh sách liên kết đơn
+- Với head lưu địa chỉ của node đầu và tail lưu địa chỉ của node đuôi
+```C
+struct node *newnode, *ptr, *prev, *temp;
+struct node *head = NULL, *tail = NULL;
+```
+- Chèn 1 node vào đầu danh sách liên kết với head là node đầu , tail là node đuôi
+```C
+void insertNodeAtTheBeginning()
+{
+    int val = 0;
+
+    printf("\nEnter the value for the node: ");
+    scanf("%d", &val);
+    newnode = createNode(val);
+    // neu danh sach lien ket chua co phan tu nao , node moi tro thanh node dau tien
+    if (head == tail && head == NULL)
+    {
+        head = tail = newnode;
+        head->next = NULL;
+        tail->next = NULL;
+    }
+    else
+    {
+        temp = head;
+        head = newnode;
+        head->next = temp;
+    }
+}
+```
+- Chèn 1 node vào cuối danh sách
+```C
+void insertNodeAtTheEnd()
+{
+    int val = 0;
+
+    printf("\nEnter the value for the Node: ");
+    scanf("%d", &val);
+    newnode = createNode(val);
+    // neu danh sach rong
+    if (head == tail && tail == NULL)
+    {
+        head = tail = newnode;
+        head->next = NULL;
+        tail->next = NULL;
+    }
+    // cho link cua node cuoi tro den newnode và tail node = newnode
+    else
+    {
+        tail->next = newnode;
+        tail = newnode;
+        tail->next = NULL;
+    }
+
+ printf("\n----INSERTED----");
+}
+```
+- Chèn vào 1 vị trí bất kỳ
+```C
+void insertNodeAtPosition()
+{
+    int pos, val, cnt = 0, i;
+
+    printf("\nEnter the value for the Node: ");
+    scanf("%d", &val);
+    newnode = createNode(val);
+    printf("\nEnter the position ");
+    scanf("%d", &pos);
+    ptr = head;
+    while (ptr != NULL)
+    {
+        ptr = ptr->next;
+        cnt++;
+    }
+    // neu vi tri chen o dau danh sach
+    if (pos == 1)
+    {
+        if (head == tail && head == NULL)
+        {
+            head = tail = newnode;
+            head->next = NULL;
+            tail->next = NULL;
+        }
+        else
+        {
+            temp = head;
+            head = newnode;
+            head->next = temp;
+        }
+        printf("\nInserted");
+    }
+    // neu vi tri chen o giua den cuoi danh sach
+    else if (pos>1 && pos<=cnt)
+    {
+        // duyet den vi tri can chen
+        ptr = head;
+        for (i = 1;i < pos;i++)
+        {
+            prev = ptr;
+            ptr = ptr->next;
+        }
+        // chen node moi
+        prev->next = newnode;
+        newnode->next = ptr;
+        printf("\n----INSERTED----");
+    }
+    // neu vi tri chen khong hop le 
+    else
+    {
+        printf("Position is out of range");
+    }
+}
+```
+- Xóa 1 node khỏi danh sách liên kết
+```C
+void deletePosition()
+{
+    int pos, cnt = 0, i;
+
+    if (head == NULL)
+    {
+        printf("List is empy\n");
+        printf(":No node to delete\n");
+    }
+    else
+    {
+        printf("\nEnter the position of value to be deleted: ");
+        scanf(" %d", &pos);
+        ptr = head;
+        if (pos == 1)
+        {
+            head = ptr->next; // bo node dau tien di
+            printf("\nElement deleted");
+        }
+        else
+        {
+            while (ptr != NULL)
+            {
+                ptr = ptr->next;
+                cnt = cnt + 1;
+            }
+            // prev la node phia truoc , ptr la node hien tai
+            if (pos > 0 && pos <= cnt)
+            {
+                ptr = head;
+                for (i = 1;i < pos;i++)
+                {
+                    prev = ptr;
+                    ptr = ptr->next;
+                }
+                // bo qua node hien tai la pos
+                prev->next = ptr->next; // prev tro den node sau node hien tai la ptr->next
+            }
+            else
+            {
+                printf("Position is out of range ");
+            }
+        free(ptr);
+        printf("\nElement deleted");
+        }
+    }
+}
+```
+## Stack

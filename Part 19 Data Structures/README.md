@@ -25,7 +25,7 @@ Một lợi thế khác của danh sách liên kết là bạn có thể lưu tr
 ![](./double_linked_list.png)
 - So sánh giữa `Array` và `Linked list`
     - Advantages and Disadvantages of Array
-    ![](./aray.png)
+    ![](./array.png)
     - Advantages and Disadvantages of Linked list
     ![](./linked_list.png)
 ### Single linked list
@@ -231,4 +231,83 @@ void deletePosition()
     }
 }
 ```
+### Double linked list
+-------------------to be continute------------------------
 ## Stack
+- Stack là cấu trúc dữ liệu tuyến tính khép kín theo nguyên tắc **Vào cuối, Ra trước (LIFO - Last In First Out)** để chèn và xóa dữ liệu.
+Nó có nghĩa là phần tử được chèn cuối cùng sẽ là phần tử đầu tiên bị xóa và phần tử được chèn trước đó sẽ bị xóa cuối cùng.
+![](./stack-in-c.png)
+- Một ngăn xếp được tham chiếu qua con trỏ đến phần tử trên cùng của ngăn xếp.Thành phần liên kết trong node cuối cùng của ngăn xếp được đặt thành null để chỉ ra đáy của ngăn xếp,
+việc không đặt liên kết trong nút đáy của ngăn xếp thành null có thể dẫn đến lỗi trong thời gian chạy.
+- Ngăn xếp và danh sách liên kết được đại diện giống nhau.Sự khác biệt là các thao tác chèn và xóa có thể xảy ra ở bất kỳ đâu trong danh sách liên kết,còn với ngăn xếp thì chỉ ở đỉnh của ngăn xếp, đó là sự khác biệt.
+- Một số **ứng dụng** của Stack:
+    - Ngăn xếp **hỗ trợ đệ quy**, các cuộc gọi hàm đệ quy.Khi một cuộc gọi được thực hiện, hàm cần biết cách trở về hàm gọi của nó,do đó, địa chỉ trả về được đưa vào ngăn xếp.
+Nếu một loạt các cuộc gọi hàm xảy ra,các giá trị trả về liên tiếp được đẩy vào ngăn xếp theo thứ tự cuối vào, đầu ra để mỗi hàm có thể trở về hàm gọi của nó.
+Vì vậy, đệ quy thường được triển khai trên một ngăn xếp nào đó.
+    - Chúng ta cũng nghe thấy thuật ngữ **"ngăn xếp cuộc gọi" (call stack)** vì nó sử dụng một ngăn xếp cho tất cả các cuộc gọi hàm, đó là cách nó được triển khai.
+Ngăn xếp được sử dụng để lưu trữ dữ liệu trong bộ nhớ.Chúng chứa không gian được tạo ra cho các biến tự động khi mỗi hàm được gọi,
+.Khi hàm trả về, không gian cho các biến đó được lấy ra khỏi ngăn xếp,đó là cách dễ nhất để thực hiện bộ nhớ ngăn xếp.
+    - Ngăn xếp có thể được sử dụng khi triển khai **lịch sử các trang đã truy cập** trong trình duyệt web.
+    - Ngăn xếp có thể được sử dụng trong một **thao tác hoàn tác** (undo) trong trình soạn thảo văn bản.Bạn chỉ cần hoàn tác thao tác cuối cùng mà bạn đã thực hiện.
+nếu bạn đang gõ và gõ và gõ và bạn muốn thực hiện thao tác hoàn tác lần cuối,thao tác cuối cùng đã được thêm vào là thao tác bạn sẽ hoàn tác.
+- Các thao tác chính trên Stack bao gồm:
+    - `push` : thêm hoặc chèn một phần tử mới và đặt nó lên trên đỉnh của ngăn xếp.
+    - `pop` : xóa phần tử khỏi đỉnh của ngăn xếp.Nó giải phóng bộ nhớ đã được cấp phát và trả về phần tử đó.
+    - `isEmpty` : kiểm tra xem ngăn xếp có rỗng không.
+    - `peek` : xem phần tử ở trên cùng mà không xóa nó.
+- Triển khai :
+
+Để thực hiện stack ta cần 1 cấu trúc giống với linked list vậy
+```C 
+struct Node{
+    int data;
+    struct Node* link;
+};
+struct Node* top;
+```
+- Push
+```C 
+void push(int data){
+    struct Node* temp = (struct Node*) malloc(sizeof(Node));
+
+    if(temp != NULL){
+        temp->data = data;
+        temp->link = top; // day top xuong duoi
+        top = temp; // phan tu moi se la dinh ngan xep
+    }
+}
+```
+- isEmpty
+```C 
+int isEmpty(){
+    return top == NULL;
+}
+```
+- pop
+```C 
+void pop(){
+    struc Node *temp;
+
+    if(top != NULL){
+        temp = top;
+        top = top->link; // xoa phan tu o dinh ngan xep
+        temp->link = NULL; 
+        free(temp); // giai phong temp tranh ro ri bo nho
+    }
+}
+```
+- display
+```C 
+void display(){
+    struct node* temp;
+
+    if(top != NULL){
+        temp = top;
+        while(temp != NULL){
+            printf("%d:\n",temp->data);
+            temp = temp->link;
+        }
+    }
+}
+```
+## Queues

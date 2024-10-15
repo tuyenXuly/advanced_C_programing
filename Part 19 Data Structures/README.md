@@ -1,5 +1,12 @@
 # Cấu trúc dữ liệu
+- Trong lập trình, bạn cố gắng đặt kiểu dữ liệu với nhu cầu của mình. Ví dụ, bạn có thể dùng kiểu `int` để đại diện cho số lượng học sinh, kiểu `float` hoặc `double` để đại diện cho điểm CPA. 
+- Cũng có nhiều kịch bản khác trong đó dữ liệu là danh sách gồm tập hợp các phần tử.
+- Vậy, kiểu dữ liệu không chỉ là `int`, `float`, `double` và các kiểu nguyên thủy khác mà thường được tích hợp sẵn trong ngôn ngữ. Còn có các kiểu dữ liệu khác gọi là dữ liệu trừu tượng **(ADT-Abstract Data Type)**, thường đại diện cho các đối tượng phức tạp hơn.
+- Khi nói về ADT, chúng ta chỉ nhắc đến những gì mà các phép toán cần thực hiện, chứ không chỉ ra cách dữ liệu được tổ chức trong bộ nhớ hay thuật toán nào được dùng để triển khai. Đó là lý do tại sao nó được gọi là trừu tượng, vì nó đưa ra một cái nhìn độc lập với cách triển khai thực tế. Kỹ thuật này được gọi là **abstraction (trừu tượng hóa)**.
+-ột số ADT phổ biến bao gồm list, stack và tree. Để tạo một ADT mới, bạn cần:
 
+    - Cung cấp cách lưu trữ dữ liệu, thường bằng cách thiết kế một cấu trúc (struct) trong C.
+    - Cung cấp các phương thức thao tác với dữ liệu như thêm, xóa, và các phép toán khác.
 ## Linked list 
 - **Linked list** (danh sách liên kết)  là một cách để lưu trữ dữ liệu.
 Nó có thể lưu trữ **nhiều loại dữ liệu khác nhau**. Đây là cấu trúc dữ liệu được sử dụng nhiều thứ hai, sau mảng (array). 
@@ -388,3 +395,39 @@ struct QNode* deQueue(struct Queue* q){
 }
 ```
 ### Dùng mảng
+- enqueue
+```C 
+void enqueue(){
+    int add_item = 0;
+
+    if(rear == MAX-1)
+        printf("Queue Overflow \n");
+    else{
+        if(front == -1) // if the queue is empty
+            front=0;   // rear = front =0 
+        
+        printf("Inset the element in queue : ");
+        scanf("%d",&add_item);
+        rear = rear +1;
+        queue_array[rear] = add_item;
+    }
+}
+```
+- dequeue
+```C 
+void dequeue(){
+
+    if(front == -1 || front > rear){
+        printf("Queue Underflow \n");
+        return;
+    }
+    else{
+        printf("Element deleted from queue is : %d\n",queue_array[front]);
+        front = front +1;
+    }
+}
+```
+- Trong hàng đợi với mảng tĩnh như trên, khi các phần tử bị xóa ở đầu (dequeue), vùng bộ nhớ tại các chỉ số ban đầu của mảng vẫn tồn tại nhưng không còn được sử dụng nữa, dẫn đến lãng phí bộ nhớ.rong hàng đợi thông thường sử dụng mảng, khi rear đạt đến chỉ số cuối cùng của mảng (mặc dù phía trước mảng có thể còn trống do các phần tử đã bị xóa), hàng đợi vẫn được coi là đầy. Điều này gây lãng phí không gian.
+
+=> Do vậy ta có thể sử dụng **Ring buffer** là 1 kiểu cấu trúc nâng cao hơn dựa trên Queue
+## Binary Trees

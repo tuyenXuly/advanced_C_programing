@@ -311,3 +311,80 @@ void display(){
 }
 ```
 ## Queues
+- Queuse hay hay hàng đợi là một cấu trúc dữ liệu phổ biến được sử dụng nhiều trong khoa học máy tính và lập trình.
+- Quese đối lập với Stack, các phần tử của hàng đợi chỉ được loại bỏ từ đầu hàng(head).Các phần tử hàng đợi chỉ được thêm vào cuối hàng (tail).Vì lý do này, hàng đợi được gọi là cấu trúc dữ liệu **"vào trước ra trước - FIFO (First In, First Out)"**
+- Ứng dụng :
+    - Hàng đợi cũng được sử dụng để hỗ trợ việc **in ấn (print spooling)**. Trong môi trường nhiều người dùng, có thể chỉ có một máy in duy nhất. Nhiều người dùng có thể tạo ra lệnh in, và nếu máy in đang bận, các lệnh in này sẽ được xếp vào hàng đợi, đợi đến khi máy in sẵn sàng.
+    - Một ví dụ khác là khi các **gói thông tin đợi trong hàng đợi trên mạng máy tính**. Mỗi khi một gói tin đến một nút mạng, nó phải được định tuyến đến nút tiếp theo. Nút định tuyến sẽ định tuyến từng gói tin một. Các gói tin thêm vào sẽ được xếp hàng chờ đến khi có thể được định tuyến.
+- Các thao tác chính trên Quese:
+  - `enqueue` (offer) : thêm vào phần tử
+  - `dequeue` (poll) : loại bỏ phần tử
+  - `IsEmpty` : kiểm tra xem hàng đợi có rỗng không
+  - `IsFull` : kiểm tra xem hàng đợi đã đầy chưa
+![](./queue-in-c.png)
+- Quese(hàng đợi) có thể được thực hiện theo cách này hoặc cách khác, thông qua mảng hoặc danh sách liên kết, và có thể có nhiều cách khác nữa.
+### Dùng linked list
+- Khởi tạo QNode và tạo Queue do ta chỉ quan tâm đến phần tử đầu và cuối của Queue. Việc giữ các con trỏ `*front` và `*rear` giúp chúng ta thực hiện các thao tác enqueue và dequeue với độ phức tạp thời gian là O(1). 
+Điều này có nghĩa là thời gian thực hiện các thao tác này là không đổi, không phụ thuộc vào số lượng phần tử trong hàng đợi
+```C 
+struct QNode{
+    int key;
+    struct QNode* next;
+};
+struct Queue{
+    struct QNode *front,*rear;
+}
+```
+- newNode :Hàm newNode tạo ra một nút mới cho hàng đợi, gán giá trị cho trường key, và khởi tạo con trỏ next của nó là NULL. 
+Hàm này sẽ được sử dụng khi bạn cần thêm một phần tử mới vào hàng đợi.
+```C 
+struct QNode* newNode(int k){
+    struct QNode* temp=(struct QNode*)malloc(sizeof(struct QNode));
+    temp->key = k;
+    temp->next = NULL;
+    return temp;
+}
+```
+
+-createQueue : khởi tạo hàng đợi
+```C
+struct Queue* createQueue(){
+    struct Queue* q = (struct Queue*)malloc(sizeof(struct Queue));
+    q->front = q->rear = NULL;
+    return q;
+}
+```
+- enqueue : thêm một phần tử mới vào cuối queue
+```C 
+void enQueue(struct Queue* q,int k){
+    struct QNode* temp = newNode(k);
+
+    // if queue is empty,then new node is front and rear both
+    if(q->rear == NULL){
+        q->front = q->rear = temp;
+        return ;
+    }
+    // add the new node at the end of queue and change rear
+    q->rear->next=temp;
+    q->rear=temp;
+}
+```
+- deQueue : xóa 1 phần tử ra khỏi hàng đợi
+```C 
+struct QNode* deQueue(struct Queue* q){
+    // if queue is empty return NULL
+    if(q->front == NULL){
+        return NULL;
+    }
+    //store previous front and move front one node ahead
+    struct QNode* temp = q->front;
+    q->front = q->front->next;
+
+    //if front becomes NULL then change rear also as NULL => queue is empty
+    if(q->front == NULL)
+        q->rear = NULL;
+
+    return temp;
+}
+```
+### Dùng mảng

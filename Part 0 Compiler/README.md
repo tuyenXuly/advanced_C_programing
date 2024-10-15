@@ -1,6 +1,6 @@
 # Tổng quan về quá trình biên dịch của 1 chương trình C
-1.  C là một ngôn ngữ bậc trung nó cần 1 trình biên dịch để chuyển đổi nó thành mã máy (là mã mà máy tính có thể hiểu được - chỉ bao gồm các số 0,1)
-2.  Quá trình biên dịch chương trình C diễn ra như sau:
+-  C là một ngôn ngữ bậc trung nó cần 1 trình biên dịch để chuyển đổi nó thành mã máy (là mã mà máy tính có thể hiểu được - chỉ bao gồm các số 0,1)
+-  Quá trình biên dịch chương trình C diễn ra như sau:
 ![](./Compilation-Process-in-C.png)
 
  Đầu tiên để biên dịch được file C ta phải có file code C . Đây chính là Source File - Bước này thì quá quen thuộc rồi ta chỉ cần tạo ra các file .c ví dụ như 1 chương trình Hello World! đơn giản
